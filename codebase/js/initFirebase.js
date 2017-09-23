@@ -7,20 +7,27 @@ var config = {
 	storageBucket: "ratemylord.appspot.com",
 	messagingSenderId: "1067609814886"
 };
-				 
+
+
 	firebase.initializeApp(config);
 	var address = "insert address here"   //this string comes from angular front end, this is just a test 
 	var database = firebase.database().ref("landlords/" + address); 
 	database.update( { 
 		address: {
 		nameOfLandlord: "I dont know", 
-		clean: 1 , 
+		cleanliness: 1 , 
 		responsive: 2 , 
+	 	facilities : 1, 
 		description: "No.", 
 		} 
-});
+	});
 
-var headings = ["nameOfLandlord", "clean", "responsive", "description"]   
+	database.update( {
+		user : { 
+		}
+	});
+
+var headings = ["nameOfLandlord", "cleanliness", "responsive", "facilities", "description"]   
 var values = []
 
 for (i = 0; i<headings.length; i++) { 
