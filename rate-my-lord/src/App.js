@@ -4,7 +4,7 @@ import "./App.css";
 
 import * as firebase from "firebase";
 
-import { Button } from "react-bootstrap";
+import {Button, Modal, Popover, Tooltip, OverlayTrigger, Form, FormGroup, Col, ControlLabel, FormControl} from "react-bootstrap";
 
 import AnotherComponent from "./AnotherComponent";
 
@@ -38,13 +38,8 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React. Hi guys</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <CounterContainer />
-        <AnotherComponent />
+        <Example />
       </div>
     );
   }
@@ -96,3 +91,64 @@ class Counter extends Component {
       });
   };
 }
+
+const Example = React.createClass({
+  getInitialState() {
+    return { showModal: false };
+  },
+
+  close() {
+    this.setState({ showModal: false });
+  },
+
+  open() {
+    this.setState({ showModal: true });
+  },
+
+  render() {
+    const popover = (
+      <Popover id="modal-popover" title="popover">
+        very popover. such engagement
+      </Popover>
+    );
+    const tooltip = (
+      <Tooltip id="modal-tooltip">
+        wow.
+      </Tooltip>
+    );
+
+    return (
+      <div>
+        <Button
+          bsStyle="primary"
+          bsSize="large"
+          onClick={this.open}
+        >
+          Login
+        </Button>
+
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form horizontal>
+              <FormGroup controlId="formHorizontalEmail">
+                <Col sm={10}>
+                  <FormControl type="email" placeholder="Email" />
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formHorizontalPassword">
+                <Col sm={10}>
+                  <FormControl type="password" placeholder="Password" />
+                </Col>
+              </FormGroup>
+            </Form> 
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
+  }
+});
+
+
