@@ -16,18 +16,13 @@ var config = {
 		address: {
 		nameOfLandlord: "I dont know", 
 		cleanliness: 1 , 
-		responsive: 2 , 
+		responsiveness: 2 , 
 	 	facilities : 1, 
 		description: "No.", 
 		} 
-	});
+});
 
-	database.update( {
-		user : { 
-		}
-	});
-
-var headings = ["nameOfLandlord", "cleanliness", "responsive", "facilities", "description"]   
+var headings = ["nameOfLandlord", "cleanliness", "responsiveness", "facilities", "description"]   
 var values = []
 
 for (i = 0; i<headings.length; i++) { 
