@@ -39,7 +39,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </div>
-        <Example />
+        <Login />
       </div>
     );
   }
@@ -92,7 +92,66 @@ class Counter extends Component {
   };
 }
 
-const Example = React.createClass({
+const Register = React.createClass({
+  getInitialState() {
+    return { showModal: false };
+  },
+
+  close() {
+    this.setState({ showModal: false });
+  },
+
+  open() {
+    this.setState({ showModal: true });
+  },
+
+  render() {
+    const popover = (
+      <Popover id="modal-popover" title="popover">
+        very popover. such engagement
+      </Popover>
+    );
+    const tooltip = (
+      <Tooltip id="modal-tooltip">
+        wow.
+      </Tooltip>
+    );
+
+    return (
+      <div>
+        <Button
+          bsStyle="primary"
+          bsSize="large"
+          onClick={this.open}
+        >
+          Login
+        </Button>
+
+        <Modal show={this.state.showModal} onHide={this.close}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form horizontal>
+              <FormGroup controlId="formHorizontalEmail">
+                <Col sm={10}>
+                  <FormControl type="email" placeholder="Email" />
+                </Col>
+              </FormGroup>
+              <FormGroup controlId="formHorizontalPassword">
+                <Col sm={10}>
+                  <FormControl type="password" placeholder="Password" />
+                </Col>
+              </FormGroup>
+            </Form> 
+          </Modal.Body>
+        </Modal>
+      </div>
+    );
+  }
+});
+
+const Login = React.createClass({
   getInitialState() {
     return { showModal: false };
   },
