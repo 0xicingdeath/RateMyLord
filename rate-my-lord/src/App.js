@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 
-import * as firebase from 'firebase';
+import * as firebase from "firebase";
 
-import {Button} from 'react-bootstrap';
+import { Button } from "react-bootstrap";
+
+import AnotherComponent from "./AnotherComponent";
 
 /*
   // Initialize Firebase
@@ -18,23 +20,19 @@ import {Button} from 'react-bootstrap';
   };
 */
 const config = {
-  apiKey: 'AIzaSyCOsaB6-a0GwYtVnTy1dhwdzij3BgHhMrk',
-  authDomain: 'fir-expo-firebase.firebaseapp.com',
-  databaseURL: 'https://fir-expo-firebase.firebaseio.com',
-  projectId: 'fir-expo-firebase',
-  storageBucket: 'fir-expo-firebase.appspot.com',
-  messagingSenderId: '706774196990',
+  apiKey: "AIzaSyCOsaB6-a0GwYtVnTy1dhwdzij3BgHhMrk",
+  authDomain: "fir-expo-firebase.firebaseapp.com",
+  databaseURL: "https://fir-expo-firebase.firebaseio.com",
+  projectId: "fir-expo-firebase",
+  storageBucket: "fir-expo-firebase.appspot.com",
+  messagingSenderId: "706774196990"
 };
 
-
-
-
 class App extends Component {
+  componentWillMount() {
+    firebase.initializeApp(config);
+  }
 
-		componentWillMount() {
-  firebase.initializeApp(config);
-		}
-				
   render() {
     return (
       <div className="App">
@@ -45,7 +43,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-		<CounterContainer />
+        <CounterContainer />
+        <AnotherComponent />
       </div>
     );
   }
@@ -54,14 +53,17 @@ class App extends Component {
 export default App;
 class CounterContainer extends Component {
   state = {
-    count: null,
+    count: null
   };
 
   componentWillMount() {
-    firebase.database().ref('counter').on('value', snapshot => {
-      let count = snapshot.val().count;
-      this.setState({ count });
-    });
+    firebase
+      .database()
+      .ref("counter")
+      .on("value", snapshot => {
+        let count = snapshot.val().count;
+        this.setState({ count });
+      });
   }
 
   render() {
@@ -75,21 +77,22 @@ class Counter extends Component {
 
     return (
       <div>
-        <span>
-          Current count: {count === null ? 'Zero' : count}
-        </span>
+        <span>Current count: {count === null ? "Zero" : count}</span>
 
-    <Button bsSize="large" active onClick={this._increaseCount}>Add one</Button>
-
-
+        <Button bsSize="large" active onClick={this._increaseCount}>
+          Add one
+        </Button>
       </div>
     );
   }
 
   _increaseCount = () => {
-		  console.log("blah"); 
-    firebase.database().ref('counter').set({
-      count: (this.props.count || 0) + 1,
-    });
+    console.log("blah");
+    firebase
+      .database()
+      .ref("counter")
+      .set({
+        count: (this.props.count || 0) + 1
+      });
   };
 }
