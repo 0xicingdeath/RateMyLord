@@ -27,6 +27,7 @@ body {
 body {
   color: #333;
   text-align: center;
+  font-family: "Times New Roman", Georgia, Serif;
   
 }
 img {
@@ -60,7 +61,7 @@ img {
  * Header
  */
 .masthead-brand {
-  margin-top: 10px;
+  margin-top: -12px;
   margin-bottom: 10px;
 }
 
@@ -93,8 +94,9 @@ img {
 }
 /* Padding for spacing */
 .inner {
-  padding: 40px;
+  padding: 47px;
   margin-bottom: 7em;
+  background: #DB3236;
 }
 
 .cover .btn-lg {
@@ -123,8 +125,15 @@ img {
 .masthead-brand {
     float: left;
   }
+  h3.masthead-brand {
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Times New Roman';
+  }
   .masthead-nav {
     float: right;
+    margin-top: -16px;
   }
    .masthead {
     position: absolute;
@@ -183,6 +192,10 @@ img {
 }
 .login-popup .btn {
   padding: 6px 76px;
+  color: #DB3236;
+  background-color: white;
+  font-family: 'Times New Roman';
+  font-weight: bold;
 }
 .reviews.col-md-8.recommendation {
   width: 50%;
@@ -195,4 +208,23 @@ img {
 }
 .col-md-4.not-login {
   width: 26%;
+}
+.btn.btn-primary.btn-lg {
+  color: red;
+  background-color: #ffffff;
+  font-family: 'Times New Roman';
+  font-weight: bold;
+}
+.btn.btn-primary {
+  border-color: #DB3236;
+}
+
+.radio+.radio {
+  margin-top: 0px;
+}
+.radio-inline+.radio-inline {
+  margin-left: 22px;
+}
+.radio-inline label {
+  font-weight: normal;
 }
