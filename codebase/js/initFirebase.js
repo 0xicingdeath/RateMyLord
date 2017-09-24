@@ -10,18 +10,68 @@ var config = {
 
 
 	firebase.initializeApp(config);
-	var address = "FakeAddress1"   //this string comes from angular front end, this is just a test 
-	var database = firebase.database().ref("landlords/" + address); 
-	database.update( { 
-			address: {
-			nameOfLandlord: "I dont know", 
-			cleanliness: 1 , 
-			responsiveness: 2 , 
-		 	facilities: 1, 
-			description: "No.", 
-		} 
-	});
+	var username;
+	var password;
+	var university;
+	var age;
+	var gender;
+	var nameoflandlord;
+	var cleanliness;
+	var responsiveness;
+	var facilities;
+	var description;
+	var add;
+/****Login Function*****/
+$(function(){
+	$("#loginform").click(function() {
+		username = $('#username').val()
+		password = $('#password').val()
+		
+	})
+});
 
+/****Registration Function*****/
+$(function(){
+	$("#registrationform").click(function() {
+		username = $('#username').val()
+		email = $('#email').val()
+		university = $('#university').val()
+		password = $('#password').val()
+		age = $("input[name='age']:checked").val()
+		gender = $("input[name='gender']:checked").val()
+		
+	})
+});
+
+var address; 
+
+/****Review Function*****/
+$(function(){
+	console.log("review function is being called")
+	$("#reviewform").click(function() {
+		var nameoflandlord = $('#nameoflandlord').val()
+		var description = $('#description').val()
+		var cleanliness = $('#cleanliness').val()
+		var responsiveness = $('#responsiveness').val()
+		var facilities = $("#facilities").val()
+		var add = $("#add").val()
+
+		address = add  //this string comes from angular front end, this is just a test
+		console.log("value coming in from front end: " + address);  
+		var database = firebase.database().ref("landlords/" + address); 
+		database.update( { 
+				address: {
+				nameOfLandlord: nameoflandlord, 
+				cleanliness: cleanliness , 
+				responsiveness: responsiveness , 
+			 	facilities: facilities, 
+				description: description, 
+			} 
+		});
+	});
+});
+
+/**
 // For Reviews 
 var headings = ["nameOfLandlord", "cleanliness", "responsiveness", "facilities", "description"]   
 var values = []
@@ -32,6 +82,7 @@ for (i = 0; i<headings.length; i++) {
 	values += snapshot.val()
 	});
 }
+
 
 var database2 = firebase.database().ref("users/")
 database2.update( { 
@@ -52,3 +103,4 @@ for (i = 0; i<userHeading.length; i++) {
 	});
 }
 console.log(userValue);
+*/
