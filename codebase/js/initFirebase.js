@@ -35,29 +35,22 @@ $(function(){
 /****Registration Function*****/
 $(function(){
 	$("#registrationform").click(function() {
-		var username, university, password, email;
-		var myPromise = new Promise(function(resolve) {
-			username = $("#blah").val()
-		//console.log(JSON.stringify(username));
-			email = $('#email').val()
-			university = $('#university').val()
-			password = $('#password').val()
-			resolve($("#blah").val())
-		});
-
-		myPromise.then(function(args) {
-			console.log("promise log", args);
-		});
+		var username = $('#blah').val()
+		var email = $('#email').val()
+		var university = $('#university').val()
+		var password = $('#pw').val()
+		var database = firebase.database().ref("landlords/"+address); 
 		var age = $("input[name='age']:checked").val()
 		var gender = $("input[name='gender']:checked").val()
-
-		console.log("  " + username + " " + " " + password)
 		
 		var database2 = firebase.database().ref("user/"+username); 			
 		console.log("value coming in from front end: " + username);
 		database2.update(JSON.parse(JSON.stringify({
 			username: username,
-			email: email
+			password: password,
+			email: email, 
+			age: age, 
+			gender: gender
 		}))) 		
 	})
 });
