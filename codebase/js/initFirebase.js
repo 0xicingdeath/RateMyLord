@@ -27,7 +27,7 @@ var config = {
 /****Login Function*****/
 $(function(){
 	$("#loginform").click(function() {
-		username = $('#username').val()
+		var username = $('#username').val()
 		password = $('#password').val()
 	})
 });
@@ -35,13 +35,30 @@ $(function(){
 /****Registration Function*****/
 $(function(){
 	$("#registrationform").click(function() {
-		username = $('#username').val()
-		email = $('#email').val()
-		university = $('#university').val()
-		password = $('#password').val()
-		age = $("input[name='age']:checked").val()
-		gender = $("input[name='gender']:checked").val()
+		var username, university, password, email;
+		var myPromise = new Promise(function(resolve) {
+			username = $("#blah").val()
+		//console.log(JSON.stringify(username));
+			email = $('#email').val()
+			university = $('#university').val()
+			password = $('#password').val()
+			resolve($("#blah").val())
+		});
+
+		myPromise.then(function(args) {
+			console.log("promise log", args);
+		});
+		var age = $("input[name='age']:checked").val()
+		var gender = $("input[name='gender']:checked").val()
+
+		console.log("  " + username + " " + " " + password)
 		
+		var database2 = firebase.database().ref("user/"+username); 			
+		console.log("value coming in from front end: " + username);
+		database2.update(JSON.parse(JSON.stringify({
+			username: username,
+			email: email
+		}))) 		
 	})
 });
 
@@ -70,19 +87,7 @@ $(function(){
 			responsiveness: responsiveness, 
 			facilities: facilities, 
 			description: description
-		})))
-/*		database.update( { 
-				address: {
-				address: JSON.parse(JSON.stringify(address)),
-				nameOfLandlord: JSON.parse(JSON.stringify(nameoflandlord)),
-				cleanliness: JSON.parse(JSON.stringify(cleanliness)), 
-				responsiveness: JSON.parse(JSON.stringify(responsiveness)), 
-			 	facilities: JSON.parse(JSON.stringify(facilities)),
-				description: JSON.parse(JSON.stringify(description)),
-			} 
-		});
-
-*/ 		
+		}))) 		
 	});
 });
 
