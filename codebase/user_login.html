@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <link href='css/bootstrap.min.css' rel='stylesheet'>
+		<link href='css/movie.css' rel='stylesheet'>
+
+		<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+
+		<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-database.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/4.3.1/firebase-messaging.js"></script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+		<script src='./js/initFirebase.js'> </script> 
+
+        <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 6
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7D9yXcDoY8PNtO5b4F9BIDZ-VVwixvYY&callback=initMap">
+    </script>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 75%;
+        width: 50%;
+        margin-top: 7em;
+        margin-left:4em;
+      }
+      /* Optional: Makes the sample page fill the window. */
+     
+    </style>
+    </head>
+    <body>
+    <div id="map"></div>
+        <div class="site-wrapper">
+          <div class="site-wrapper-inner">
+            <div class="cover-container">
+              <div class="masthead clearfix">
+                <div class="inner">
+                  <h3 class="masthead-brand">RateMyLord</h3>
+                  <nav>
+                    <ul class="nav masthead-nav">
+                      <li><button type="button" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModalReview">Review</button></li>
+                    </ul>
+                  </nav>
+                  <div class="modal fade" id="myModalReview" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                          </button>
+                          <h4 style="font-size: 30px; font-family='Times New Roman'; color:#DB3236">Write Review</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form>
+                            <div class="form-group">
+                              <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control" id="landlordname" name="landlordname" placeholder="LandLordName">
+                            </div>
+                            <div class="form-group">
+                              <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                            </div>
+                            <div class="form-group">
+                              <label for="cleanliness" style="float:left; font-weight: normal">Cleanliness</label>
+                              <select class="form-control" id="cleanliness">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="responsive" style="float:left; font-weight: normal">Responsiveness</label>
+                              <select class="form-control" id="responsiveness">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="facilities" style="float:left; font-weight: normal">Facilities</label>
+                              <select class="form-control" id="facilities">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                              </select>
+                            </div>
+                            <div class="form-group login-popup">
+                              <button type="submit" class="btn btn-primary" value="Submit2" name="Submit" onClick="register()">Submit</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
+
+        
