@@ -228,3 +228,9 @@ img {
 .radio-inline label {
   font-weight: normal;
 }
+.second {
+  position: absolute;
+  top: 8em;
+  left: 51em;
+  text-align: left;
+}
