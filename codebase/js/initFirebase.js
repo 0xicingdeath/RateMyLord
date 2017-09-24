@@ -21,12 +21,14 @@ var config = {
 	var facilities;
 	var description;
 	var add;
+
+
+
 /****Login Function*****/
 $(function(){
 	$("#loginform").click(function() {
 		username = $('#username').val()
 		password = $('#password').val()
-		
 	})
 });
 
@@ -53,23 +55,39 @@ $(function(){
 		var description = $('#description').val()
 		var cleanliness = $('#cleanliness').val()
 		var responsiveness = $('#responsiveness').val()
+		console.log(responsiveness); 
 		var facilities = $("#facilities").val()
 		var add = $("#add").val()
 
+
 		address = add  //this string comes from angular front end, this is just a test
-		console.log("value coming in from front end: " + address);  
-		var database = firebase.database().ref("landlords/" + address); 
-		database.update( { 
+		var database = firebase.database().ref("landlords/"+address); 			
+		console.log("value coming in from front end: " + address);
+		database.update(JSON.parse(JSON.stringify({
+			address: address,
+			nameOfLandlord: nameoflandlord,
+			cleanliness: cleanliness,
+			responsiveness: responsiveness, 
+			facilities: facilities, 
+			description: description
+		})))
+/*		database.update( { 
 				address: {
-				nameOfLandlord: nameoflandlord, 
-				cleanliness: cleanliness , 
-				responsiveness: responsiveness , 
-			 	facilities: facilities, 
-				description: description, 
+				address: JSON.parse(JSON.stringify(address)),
+				nameOfLandlord: JSON.parse(JSON.stringify(nameoflandlord)),
+				cleanliness: JSON.parse(JSON.stringify(cleanliness)), 
+				responsiveness: JSON.parse(JSON.stringify(responsiveness)), 
+			 	facilities: JSON.parse(JSON.stringify(facilities)),
+				description: JSON.parse(JSON.stringify(description)),
 			} 
 		});
+
+*/ 		
 	});
 });
+
+
+
 
 /**
 // For Reviews 
