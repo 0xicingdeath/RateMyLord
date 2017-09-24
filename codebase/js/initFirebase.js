@@ -49,20 +49,15 @@ var address;
 
 /****Review Function*****/
 $(function(){
-	console.log("review function is being called")
 	$("#reviewform").click(function() {
 		var nameoflandlord = $('#nameoflandlord').val()
 		var description = $('#description').val()
 		var cleanliness = $('#cleanliness').val()
 		var responsiveness = $('#responsiveness').val()
-		console.log(responsiveness); 
 		var facilities = $("#facilities").val()
 		var add = $("#add").val()
-
-
 		address = add  //this string comes from angular front end, this is just a test
-		var database = firebase.database().ref("landlords/"+address); 			
-		console.log("value coming in from front end: " + address);
+		var database = firebase.database().ref("landlords/"+address); 		
 		database.update(JSON.parse(JSON.stringify({
 			address: address,
 			nameOfLandlord: nameoflandlord,
@@ -71,37 +66,24 @@ $(function(){
 			facilities: facilities, 
 			description: description
 		})))
-/*		database.update( { 
-				address: {
-				address: JSON.parse(JSON.stringify(address)),
-				nameOfLandlord: JSON.parse(JSON.stringify(nameoflandlord)),
-				cleanliness: JSON.parse(JSON.stringify(cleanliness)), 
-				responsiveness: JSON.parse(JSON.stringify(responsiveness)), 
-			 	facilities: JSON.parse(JSON.stringify(facilities)),
-				description: JSON.parse(JSON.stringify(description)),
-			} 
-		});
+		var headings = ["nameOfLandlord", "cleanliness", "responsiveness", "facilities", "description"]   
+		var values = []
 
-*/ 		
+		for (si = 0; i<headings.length; i++) { 
+			var temp = firebase.database().ref(decodeURI("landlords/"+ address + "/address/" +  headings[i]));
+			temp.on('value', function(snapshot) {
+			values += snapshot.val()
+			});
+		}
+		console.log(values)
+
 	});
 });
 
 
 
 
-/**
-// For Reviews 
-var headings = ["nameOfLandlord", "cleanliness", "responsiveness", "facilities", "description"]   
-var values = []
-
-for (i = 0; i<headings.length; i++) { 
-	var temp = firebase.database().ref(decodeURI("landlords/"+ address + "/address/" +  headings[i]));
-	temp.on('value', function(snapshot) {
-	values += snapshot.val()
-	});
-}
-
-
+/*
 var database2 = firebase.database().ref("users/")
 database2.update( { 
 	user: { 
